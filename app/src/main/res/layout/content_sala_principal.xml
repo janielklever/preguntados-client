@@ -34,16 +34,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <include layout="@layout/creacion_juego"></include>
+                <include layout="@layout/creacion_juego" android:id="@+id/create"></include>
+
+                <include layout="@layout/join_juego" android:id="@+id/join"></include>
 
 
-                <LinearLayout
-                    android:id="@+id/linearLayout2"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-
-                </LinearLayout>
 
 
             </FrameLayout>

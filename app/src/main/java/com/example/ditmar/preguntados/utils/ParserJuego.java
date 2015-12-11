@@ -2,7 +2,9 @@ package com.example.ditmar.preguntados.utils;
 
 import com.example.ditmar.preguntados.juego.DatosJuego;
 import com.example.ditmar.preguntados.juego.Preguntas;
+import com.example.ditmar.preguntados.juego.Puntajes;
 import com.example.ditmar.preguntados.juego.Respuestas;
+import com.example.ditmar.preguntados.juego.Usuarios;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -27,6 +29,21 @@ public class ParserJuego {
             Integer cantpreguntas=juegoJson.getInt("cantpreguntas");
             juegoDatos=new DatosJuego(nombre,estado,cantpreguntas);
             JSONArray preg=juegoJson.getJSONArray("preguntas");
+
+            JSONArray jugadores=juegoJson.getJSONArray("usuario");
+
+            for(int i=0;i<jugadores.length();i++)
+            {
+                JSONObject jugones=(JSONObject)jugadores.get(i);
+                String email=jugones.getString("email");
+                String nombres=jugones.getString("nombres");
+                JSONObject puntaje=jugones.getJSONObject("puntaje");
+                Puntajes puntos=new Puntajes();
+                puntos.partidas=puntaje.getInt("partidas");
+                puntos.puntos=puntaje.getInt("puntos");
+                Usuarios user=new Usuarios(email,nombres,puntos);
+                juegoDatos.addUsuarios(user);
+            }
             for(int i=0;i<preg.length();i++)
             {
                 JSONObject auxp=(JSONObject)preg.get(i);
